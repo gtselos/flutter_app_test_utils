@@ -1,7 +1,8 @@
 #!/bin/bash
 
+# Script to run flutter integration tests without the need of manually granting permissions
+# Doesn't work for ios real devices
 # usage: sh integration_testing.sh (ios|android) (device_id)
-# doesn't work for ios real devices
 
 # to install applesimutils in mac run:
 # brew tap wix/brew
@@ -67,7 +68,7 @@ fi
 
 echo "device is emulator: $device_is_emulator"
 
-echo "gettting to app dir..."
+echo "getting to app dir..."
 cd $app_dir
 
 if [[ $device_is_emulator -eq 1 ]]
