@@ -13,7 +13,8 @@ app_dir=~/myApp
 app_file_name=app.dart
 extra_build_params=(--flavor development --debug)
 extra_drive_params=(--flavor development)
-package_name=com.package.app
+package_name_android=com.package.app
+package_name_ios=com.package.app
 ios_perms="location=always, notifications=YES"
 android_perms=android.permission.ACCESS_FINE_LOCATION
 device_id=$2
@@ -74,9 +75,9 @@ flutter clean && flutter build $package "${extra_build_params[@]}" -t test_drive
 
 if [[ $1 == "ios" ]]
 then
-	applesimutils --byId $device_id --bundle $package_name --setPermissions $ios_perms
+	applesimutils --byId $device_id --bundle $package_name_ios --setPermissions "$ios_perms"
 else
-	adb -s $device_id shell pm grant $package_name $android_perms
+	adb -s $device_id shell pm grant $package_name_android $android_perms
 fi
 
 flutter drive --target=test_driver/$app_file_name "${extra_drive_params[@]}" --no-build -d $device_id
