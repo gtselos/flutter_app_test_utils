@@ -11,7 +11,7 @@
 
 app_dir=~/myApp
 app_file_name=app.dart
-extra_build_params=(--flavor development)
+extra_build_params=(--flavor development --debug)
 extra_drive_params=(--flavor development)
 package_name=com.package.app
 ios_perms="location=always, notifications=YES"
@@ -63,20 +63,10 @@ then
 	extra_build_params+=(--simulator)
 else
 	package="apk"
-	device_is_emulator=`flutter devices | grep "$device_id" | grep -ce "emulator"`
 fi
-
-echo "device is emulator: $device_is_emulator"
 
 echo "getting to app dir..."
 cd $app_dir
-
-if [[ $device_is_emulator -eq 1 ]]
-then
-	extra_build_params+=(--debug)
-else
-	extra_build_params+=(--release)
-fi
 
 echo "cleaning, building and installing"
 
